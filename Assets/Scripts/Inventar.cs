@@ -1,16 +1,17 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class Inventar : MonoBehaviour
 {
-    public Button button; // für das Prefab
+    public ButtonClick button; // für das Prefab
     public Canvas canvas; // für den Canvas
     public GameObject inventarPanel; // für das Panel
     public GameObject textKeineGegenstaende; // für den Text, wenn keine Gegenstände vorhanden sind
 
     // für die Gegenstände; Konstruktion ist vorläufig
     public string[] gegenstaende = { "Objekt 1", "Objekt 2", "Objekt 3", "Objekt 4", "leer", "leer", "leer", "leer", "leer" };
+
+    public static string aktuellerGegenstand = "nichts";
 
     bool zeigeInventar = false; // für die Anzeige des Inventars
     float saveTimeScale; // zum Unterbrechen des Spiels
@@ -35,17 +36,53 @@ public class Inventar : MonoBehaviour
         {
             textKeineGegenstaende.SetActive(true);
         }
-
     }
-    void Start()
+
+    public bool FindeSlot(string gegenstandName)
     {
-        canvas.enabled = false;
         for (int i = 0; i < gegenstaende.Length; i++)
         {
-            Button itemButton = Instantiate(button);
-            itemButton.transform.SetParent(inventarPanel.transform, false);
-            itemButton.GetComponentInChildren<TextMeshProUGUI>().text = gegenstaende[i];
+            if (gegenstaende[i] == gegenstandName)
+            {
+                return false; // Gegenstand bereits vorhanden
+            }
         }
+
+        // Durchsucht das Inventar nach einem leeren Slot
+        for (int i = 0; i < gegenstaende.Length; i++)
+        {
+            if (gegenstaende[i] == "leer")
+            {
+                gegenstaende[i] = gegenstandName;
+                InitialisiereInventoryButtons();
+                return true; // Slot gefunden
+            }
+        }
+        return false; // Kein leerer Slot gefunden
+    }
+
+    void InitialisiereInventoryButtons()
+    {
+        // Alle Game-Objekte mit dem Tag "listButton" besorgen und zerstören.
+        foreach (GameObject obj in
+        GameObject.FindGameObjectsWithTag("listButton"))
+            Destroy(obj);
+
+        // Die Schaltflächen erzeugen
+        for (int i = 0; i < gegenstaende.Length; i++)
+        {
+            ButtonClick ausgabe = Instantiate(button);
+            ausgabe.transform.SetParent(inventarPanel.transform, false);
+            ausgabe.GetComponentInChildren<TextMeshProUGUI>().text = gegenstaende[i];
+        }
+    }
+
+    void Start()
+    {
+        // Canvas deaktivieren
+        canvas.enabled = false;
+
+        InitialisiereInventoryButtons();
     }
     void Update()
     {

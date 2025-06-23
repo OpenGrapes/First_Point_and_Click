@@ -9,6 +9,7 @@ public class ButtonClick : MonoBehaviour
     // für den aktuellen Gegenstand
     string aktuellerGegenstand = "nichts";
 
+
     void Start()
     {
         // die Text-Komponente beschaffen
@@ -22,6 +23,7 @@ public class ButtonClick : MonoBehaviour
         if (GetComponentInChildren<TextMeshProUGUI>().text != "leer")
         {
             aktuellerGegenstand = GetComponentInChildren<TextMeshProUGUI>().text;
+            Inventar.aktuellerGegenstand = aktuellerGegenstand;
             ausgabe.text = "Sie tragen gerade " + aktuellerGegenstand;
         }
         else

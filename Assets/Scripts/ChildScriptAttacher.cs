@@ -8,11 +8,13 @@ public class ChildScriptAttacher : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
-            // Prüfen, ob das Script schon dran ist
-            if (child.GetComponent<Mauszeiger>() == null)
+            foreach (Transform subChild in child)
             {
-                Mauszeiger mz = child.gameObject.AddComponent<Mauszeiger>();
-                mz.mauszeiger = mauszeigerTexture;
+                if (subChild.GetComponent<Mauszeiger>() == null)
+                {
+                    Mauszeiger mz = subChild.gameObject.AddComponent<Mauszeiger>();
+                    mz.mauszeiger = mauszeigerTexture;
+                }
             }
         }
     }

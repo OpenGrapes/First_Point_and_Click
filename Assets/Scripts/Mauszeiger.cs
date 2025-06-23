@@ -7,8 +7,6 @@ public class Mauszeiger : MonoBehaviour
     [HideInInspector]
     public Texture2D mauszeiger;
 
-
-
     void OnMouseEnter()
     {
         Cursor.SetCursor(mauszeiger, Vector2.zero, CursorMode.Auto);

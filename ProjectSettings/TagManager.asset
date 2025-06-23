@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Clickable
+  - listButton
   layers:
   - Default
   - TransparentFX
