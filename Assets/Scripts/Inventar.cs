@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class Inventar : MonoBehaviour
 {
@@ -17,8 +19,15 @@ public class Inventar : MonoBehaviour
     bool zeigeInventar; // für die Anzeige des Inventars
     float saveTimeScale; // zum Unterbrechen des Spiels
 
+    string dateiname; // Für den Dateinamen;
+
     void Start()
     {
+        // Den Dateinamen setzen
+        dateiname = Path.Combine(Application.persistentDataPath, "gegenstaende.bin");
+        // Die Liste laden bzw. neu erzeugen
+        ListeLaden();
+
         // Canvas deaktivieren
         canvas.enabled = false;
 
@@ -68,9 +77,9 @@ public class Inventar : MonoBehaviour
             // wir den Gegenstand durch überschreiben
             if (listeGegenstaende[ausgewaehlterIndex].GetAnzahl() == 0)
                 listeGegenstaende[ausgewaehlterIndex] = new Gegenstand(0, "leer", "leer");
-                ausgewaehlterIndex = -1;        // Auswahl fällt wieder weg
-                if (ButtonClick.ausgabe != null)
-                    ButtonClick.ausgabe.text = "Sie tragen gerade nichts.";
+            ausgewaehlterIndex = -1;        // Auswahl fällt wieder weg
+            if (ButtonClick.ausgabe != null)
+                ButtonClick.ausgabe.text = "Sie tragen gerade nichts.";
             // Die Buttons erstellen
         }
         InitialisiereInventoryButtons();
@@ -147,6 +156,38 @@ public class Inventar : MonoBehaviour
             listeGegenstaende[i].GetName() + "\n" +
             listeGegenstaende[i].GetAnzahl().ToString();
         }
+        // Die Liste speichern;
+        ListeSpeichern();
     }
 
+    void ListeLaden()
+    {
+        // Für den FileStream
+        if (File.Exists(dateiname))
+        {
+            // Eine neue instanz von FileStream erzeugen
+            // Die Datei wird zum lesen geöffnet
+            FileStream meinFileStream = new FileStream(dateiname, FileMode.Open, FileAccess.Read);
+            // Eine instanz von BinaryFormatter erzeugen
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            // Die Daten deserialisieren und ablegen
+            listeGegenstaende = binaryFormatter.Deserialize(meinFileStream) as List<Gegenstand>;
+            meinFileStream.Close();
+        }// sonst 10 leere Einträge erzeugen
+        else
+        {
+            for (int i = 0; i < anzahlGegenstaende; i++)
+                listeGegenstaende.Add(new Gegenstand(0, "leer", "leer"));
+        }
+    }
+    void ListeSpeichern()
+    {
+        // Eine neue Instanz von FileStream erzeugen
+        FileStream meinFileStream = new FileStream(dateiname, FileMode.Create);
+        // Eine Instanz von BinaryFormatter erzeugen
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+        // Die Daten speichern. Dazu wird einfach die Liste serialisiert
+        binaryFormatter.Serialize(meinFileStream, listeGegenstaende);
+        meinFileStream.Close();
+    }
 }
