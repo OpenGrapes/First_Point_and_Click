@@ -699,7 +699,7 @@ MonoBehaviour:
     m_Right: 20
     m_Top: 50
     m_Bottom: 50
-  m_ChildAlignment: 0
+  m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 150, y: 150}
@@ -977,6 +977,7 @@ GameObject:
   - component: {fileID: 535077240}
   - component: {fileID: 535077239}
   - component: {fileID: 535077238}
+  - component: {fileID: 535077242}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -1073,6 +1074,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 978919808}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &535077242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535077237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc382db32e37d7642b64003344158900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventar: {fileID: 689937217}
+  nameGegenstand: "Schl\xFCssel"
+  ausgabe: {fileID: 903796536}
+  maxAnzahl: 2
+  bedingungGegenstand: "T\xFCr"
 --- !u!1 &665193438
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,16 +1229,7 @@ MonoBehaviour:
   canvas: {fileID: 665193441}
   inventarPanel: {fileID: 327008193}
   textKeineGegenstaende: {fileID: 76721270}
-  gegenstaende:
-  - Objekt 1
-  - Objekt 2
-  - Objekt 3
-  - Objekt 4
-  - leer
-  - leer
-  - leer
-  - leer
-  - leer
+  anzahlGegenstaende: 10
 --- !u!4 &689937218
 Transform:
   m_ObjectHideFlags: 0
@@ -1248,6 +1257,7 @@ GameObject:
   - component: {fileID: 814849378}
   - component: {fileID: 814849377}
   - component: {fileID: 814849376}
+  - component: {fileID: 814849379}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -1344,6 +1354,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 814849374}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &814849379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814849374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdcfe8462fdb89d4b8c10c16f12735bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ausgabe: {fileID: 903796536}
+  inventar: {fileID: 689937217}
+  bedingung: "T\xFCr"
 --- !u!1 &836856302
 GameObject:
   m_ObjectHideFlags: 0
@@ -1433,7 +1458,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1768,6 +1793,7 @@ GameObject:
   - component: {fileID: 1559587550}
   - component: {fileID: 1559587549}
   - component: {fileID: 1559587548}
+  - component: {fileID: 1559587552}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1864,6 +1890,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 978919808}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1559587552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559587547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc382db32e37d7642b64003344158900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventar: {fileID: 689937217}
+  nameGegenstand: "Schl\xFCssel"
+  ausgabe: {fileID: 903796536}
+  maxAnzahl: 2
+  bedingungGegenstand: "T\xFCr"
 --- !u!1 &1741289779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1890,7 +1933,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741289779}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92e1e3eeaa7b97940b5430ac7d173b16, type: 3}
   m_Name: 
@@ -1905,7 +1948,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741289779}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 771a0cd1b395d834c9b7ba5510a81fd6, type: 3}
   m_Name: 
@@ -1954,6 +1997,7 @@ GameObject:
   - component: {fileID: 1756889839}
   - component: {fileID: 1756889838}
   - component: {fileID: 1756889837}
+  - component: {fileID: 1756889841}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -2052,6 +2096,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 978919808}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1756889841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756889836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc382db32e37d7642b64003344158900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventar: {fileID: 689937217}
+  nameGegenstand: "kleiner Schl\xFCssel"
+  ausgabe: {fileID: 903796536}
+  maxAnzahl: 1
+  bedingungGegenstand: Kiste
 --- !u!1 &2066424729
 GameObject:
   m_ObjectHideFlags: 0

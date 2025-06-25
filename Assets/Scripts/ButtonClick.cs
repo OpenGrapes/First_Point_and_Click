@@ -4,11 +4,7 @@ using TMPro;
 public class ButtonClick : MonoBehaviour
 {
     // für die Ausgabe
-    TextMeshProUGUI ausgabe;
-
-    // für den aktuellen Gegenstand
-    string aktuellerGegenstand = "nichts";
-
+    public static TextMeshProUGUI ausgabe;
 
     void Start()
     {
@@ -16,19 +12,25 @@ public class ButtonClick : MonoBehaviour
         ausgabe = GameObject.Find("Canvas/Ausgabe").GetComponent<TextMeshProUGUI>();
     }
 
+    void Update()
+    {
+
+    }
+
     public void OnClick()
     {
-        // den Text beschaffen und anzeigen
-        // aber nur dann, wenn der Gegenstand nicht "leer" ist
-        if (GetComponentInChildren<TextMeshProUGUI>().text != "leer")
+        int idx = transform.GetSiblingIndex();          // Position des Slots
+        var eintrag = Inventar.listeGegenstaende[idx];  // kurzer Alias
+
+        // Slot leer?  → Auswahl zurücksetzen
+        if (eintrag.GetAnzahl() == 0)
         {
-            aktuellerGegenstand = GetComponentInChildren<TextMeshProUGUI>().text;
-            Inventar.aktuellerGegenstand = aktuellerGegenstand;
-            ausgabe.text = "Sie tragen gerade " + aktuellerGegenstand;
+            Inventar.ausgewaehlterIndex = -1;           // nichts ausgewählt
+            return;
         }
-        else
-        {
-            ausgabe.text = "Sie tragen gerade nichts";
-        }
+
+        // Slot hat Gegenstand → diesen auswählen
+        Inventar.ausgewaehlterIndex = idx;
+        ausgabe.text = "Sie tragen gerade " + eintrag.GetName();
     }
 }
