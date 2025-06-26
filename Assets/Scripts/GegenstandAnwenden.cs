@@ -6,6 +6,8 @@ public class GegenstandAnwenden : MonoBehaviour
     public TextMeshProUGUI ausgabe;
     public Inventar inventar; // Referenz zum Inventar-Skript
     public string bedingung; // Bedingung, die der Gegenstand erfüllen muss
+    public int anzahl; // Anzahl des Gegenstands, die benötigt wird
+
     float anzeigeZeit;
     bool zeigeHinweis;
     
@@ -53,7 +55,7 @@ public class GegenstandAnwenden : MonoBehaviour
         // ───── 3. Jetzt ist der Index sicher gültig ─────
         string itemName = Inventar.listeGegenstaende[Inventar.ausgewaehlterIndex].GetName();
 
-        if (inventar.PruefeGegenstand(bedingung))          // Bedingung passt?
+        if (inventar.PruefeGegenstand(bedingung, anzahl))          // Bedingung passt?
             ausgabe.text = "Die Tür öffnet sich.";
         else
             ausgabe.text = $"Mit {itemName} lässt sich die Tür nicht öffnen.";

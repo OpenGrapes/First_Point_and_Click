@@ -23,10 +23,10 @@ public class Inventar : MonoBehaviour
 
     void Start()
     {
-        // Den Dateinamen setzen
         dateiname = Path.Combine(Application.persistentDataPath, "gegenstaende.bin");
+
         // Die Liste laden bzw. neu erzeugen
-        ListeLaden();
+        ListeLaden(this.dateiname);
 
         // Canvas deaktivieren
         canvas.enabled = false;
@@ -65,14 +65,13 @@ public class Inventar : MonoBehaviour
         ausgewaehlterIndex = index;
     }
 
-    public bool PruefeGegenstand(string bedingung)
+    public bool PruefeGegenstand(string bedingung, int anzahl)
     {
         bool ergebnis = false;
-        if (bedingung == listeGegenstaende[ausgewaehlterIndex].GetBedingung())
+        if (bedingung == listeGegenstaende[ausgewaehlterIndex].GetBedingung() && anzahl <= listeGegenstaende[ausgewaehlterIndex].GetAnzahl())
         {
             ergebnis = true;
-            // 1 abziehen
-            listeGegenstaende[ausgewaehlterIndex].AendereAnzahl(-1);
+            listeGegenstaende[ausgewaehlterIndex].AendereAnzahl(anzahl * -1);
             // Wenn es der letzte Gegenstand war, löschen
             // wir den Gegenstand durch überschreiben
             if (listeGegenstaende[ausgewaehlterIndex].GetAnzahl() == 0)
@@ -157,10 +156,10 @@ public class Inventar : MonoBehaviour
             listeGegenstaende[i].GetAnzahl().ToString();
         }
         // Die Liste speichern;
-        ListeSpeichern();
+        ListeSpeichern(this.dateiname);
     }
 
-    void ListeLaden()
+    void ListeLaden(string dateiname)
     {
         // Für den FileStream
         if (File.Exists(dateiname))
@@ -180,14 +179,22 @@ public class Inventar : MonoBehaviour
                 listeGegenstaende.Add(new Gegenstand(0, "leer", "leer"));
         }
     }
-    void ListeSpeichern()
+    void ListeSpeichern(string dateiname)
     {
-        // Eine neue Instanz von FileStream erzeugen
-        FileStream meinFileStream = new FileStream(dateiname, FileMode.Create);
-        // Eine Instanz von BinaryFormatter erzeugen
-        BinaryFormatter binaryFormatter = new BinaryFormatter();
-        // Die Daten speichern. Dazu wird einfach die Liste serialisiert
-        binaryFormatter.Serialize(meinFileStream, listeGegenstaende);
-        meinFileStream.Close();
+        // Wenn die Liste leer ist, wird sie nicht gespeichert
+        if (listeGegenstaende.Count == 0) return;
+
+        // Wenn die Datei schon existiert, wird sie überschrieben
+        if (File.Exists(dateiname))
+            File.Delete(dateiname);
+        {
+            // Eine neue Instanz von FileStream erzeugen
+            FileStream meinFileStream = new FileStream(dateiname, FileMode.Create);
+            // Eine Instanz von BinaryFormatter erzeugen
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            // Die Daten speichern. Dazu wird einfach die Liste serialisiert
+            binaryFormatter.Serialize(meinFileStream, listeGegenstaende);
+            meinFileStream.Close();
+        }
     }
 }
