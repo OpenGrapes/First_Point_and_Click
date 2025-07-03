@@ -9,8 +9,8 @@ Dieses Projekt ist eine technische Unity-Demo im First-Person-Stil mit klassisch
 - Datenverwaltung über externe Dateien
 
 ## 🛠️ Technologien
-- Unity 3D (aktuelle Version)
-- C#  
+- C#
+- Unity 3D (aktuelle Version) 
 - Git & Jira (Projektverwaltung)
 
 ## 🧪 Status
