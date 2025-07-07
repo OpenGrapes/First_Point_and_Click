@@ -25,15 +25,15 @@ Dieses Projekt ist eine technische First-Person-Point-and-Click-Demo, in der ein
 
 ### 🎬 Systemüberblick
 ![Labyrinth Vorstellung](Media/Labyrinth_Vorstellung.gif)  
-Ein kurzer Überblick über Aufbau und Logik des Labyrinthsystems.
+Ein kurzer Überblick über Aufbau und Darstellung des Labyrinthsystems.
 
 ### 🧭 Labyrinth-Generierung
 ![Labyrinth Generierung](Media/Labyrinth_Generierung.gif)  
-Das Labyrinth wird zur Laufzeit automatisch generiert – jede Spielrunde ist einzigartig.
+Das Labyrinth wird zur Laufzeit automatisch generiert. Jede Spielrunde ist einzigartig.
 
 ### 👁️ First-Person-Ansicht
 ![First Person View](Media/Labyrinth_First-Person-View.gif)  
-Erkundung der Umgebung aus der Ich-Perspektive.
+Erkundung der Umgebung aus der Ego-Perspektive.
 
 ---
 
